@@ -7,7 +7,7 @@ const forms = () => {
   const message = {
     loading: 'Идёт отпрака данных...',
     sucsess: 'Спасибо, мы с вами свяжемся',
-    fail: 'Спасибо, мы с вами свяжемся'
+    fail: 'Упс... Что-то пошло не так...'
   }
 
   phoneInputs.forEach(input => {
@@ -16,13 +16,25 @@ const forms = () => {
     })
   })
 
+  const getData = async url => {
+    const res = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: 'GET',
+    })
+  }
+
   const postData = async (url, data) => {
     const res = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+      }, 
       method: 'POST',
-      body: data,
+      body: JSON.stringify(data)
     })
 
-    return await res();
+    return await res;
   }
 
   forms.forEach(form => {
@@ -32,19 +44,20 @@ const forms = () => {
       statusMessage.classList.add('status');
       form.appendChild(statusMessage);
       statusMessage.textContent = message.loading;
-      // const data = new FormData(form);
       const inputs = form.querySelectorAll('input');
       const data = {};
       inputs.forEach(input => {
         data[input.name] = input.value;
       })
       console.log(data);
-      postData('asssets/server.php', data)
+      postData('https://irvas-company-default-rtdb.firebaseio.com/orders.json', data)
+        .then(res => res.json())
         .then(res => {
           console.log(res);
-          status.message.textContent = message.sucsess;
+          statusMessage.textContent = message.sucsess;
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(error)
           statusMessage.textContent = message.fail;
         })
         .finally(() => {
@@ -59,3 +72,5 @@ const forms = () => {
 }
 
 export default forms;
+
+// BD   https://irvas-company-default-rtdb.firebaseio.com/orders/json

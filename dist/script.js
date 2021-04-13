@@ -17890,7 +17890,7 @@ var forms = function forms() {
   var message = {
     loading: 'Идёт отпрака данных...',
     sucsess: 'Спасибо, мы с вами свяжемся',
-    fail: 'Спасибо, мы с вами свяжемся'
+    fail: 'Упс... Что-то пошло не так...'
   };
   phoneInputs.forEach(function (input) {
     input.addEventListener('input', function () {
@@ -17898,29 +17898,57 @@ var forms = function forms() {
     });
   });
 
-  var postData = function postData(url, data) {
+  var getData = function getData(url) {
     var res;
-    return regeneratorRuntime.async(function postData$(_context) {
+    return regeneratorRuntime.async(function getData$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
             return regeneratorRuntime.awrap(fetch(url, {
-              method: 'POST',
-              body: data
+              headers: {
+                "Content-Type": "application/json"
+              },
+              method: 'GET'
             }));
 
           case 2:
             res = _context.sent;
-            _context.next = 5;
-            return regeneratorRuntime.awrap(res());
+
+          case 3:
+          case "end":
+            return _context.stop();
+        }
+      }
+    });
+  };
+
+  var postData = function postData(url, data) {
+    var res;
+    return regeneratorRuntime.async(function postData$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return regeneratorRuntime.awrap(fetch(url, {
+              headers: {
+                "Content-Type": "application/json"
+              },
+              method: 'POST',
+              body: JSON.stringify(data)
+            }));
+
+          case 2:
+            res = _context2.sent;
+            _context2.next = 5;
+            return regeneratorRuntime.awrap(res);
 
           case 5:
-            return _context.abrupt("return", _context.sent);
+            return _context2.abrupt("return", _context2.sent);
 
           case 6:
           case "end":
-            return _context.stop();
+            return _context2.stop();
         }
       }
     });
@@ -17932,18 +17960,20 @@ var forms = function forms() {
       var statusMessage = document.createElement('div');
       statusMessage.classList.add('status');
       form.appendChild(statusMessage);
-      statusMessage.textContent = message.loading; // const data = new FormData(form);
-
+      statusMessage.textContent = message.loading;
       var inputs = form.querySelectorAll('input');
       var data = {};
       inputs.forEach(function (input) {
         data[input.name] = input.value;
       });
       console.log(data);
-      postData('asssets/server.php', data).then(function (res) {
+      postData('https://irvas-company-default-rtdb.firebaseio.com/orders.json', data).then(function (res) {
+        return res.json();
+      }).then(function (res) {
         console.log(res);
-        status.message.textContent = message.sucsess;
-      }).catch(function () {
+        statusMessage.textContent = message.sucsess;
+      }).catch(function (error) {
+        console.log(error);
         statusMessage.textContent = message.fail;
       }).finally(function () {
         form.reset();
@@ -17955,7 +17985,7 @@ var forms = function forms() {
   });
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (forms);
+/* harmony default export */ __webpack_exports__["default"] = (forms); // BD   https://irvas-company-default-rtdb.firebaseio.com/orders/json
 
 /***/ }),
 
