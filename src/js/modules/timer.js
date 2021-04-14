@@ -13,7 +13,6 @@ const  timer = () => {
   
   document.querySelector('#deadline-date').textContent = deadlineDate;
   document.querySelector('#deadline-mounth').textContent = mounthes[deadlineMounth];
-  console.log(deadlineMounth, deadlineDate)
   
   function getRemnant(){
     const now = Date.now();

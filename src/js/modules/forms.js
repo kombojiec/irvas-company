@@ -53,7 +53,6 @@ const forms = (state) => {
           data[key] = state[key];
         }
       }
-      // console.log(data);
 
       postData('https://irvas-company-default-rtdb.firebaseio.com/orders.json', data)
         .then(res => res.json())
