@@ -17841,6 +17841,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_modalStateHandler__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/modalStateHandler */ "./src/js/modules/modalStateHandler.js");
 /* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/timer */ "./src/js/modules/timer.js");
+/* harmony import */ var _modules_imagePopup__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/imagePopup */ "./src/js/modules/imagePopup.js");
+
 
 
 
@@ -17852,11 +17854,11 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_modal__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.glazing_slider', '.glazing_block', '.glazing_content', 'slick-active');
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.decoration_slider', '.no_click', '.decoration_content > div > div', 'after_click');
-  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.balcon_icons', '.balcon_icons_img', '.big_img > img', 'do_image_more', 'inline-block'); // (tabsHeaderSelector, tabsItemSelector, tabsContentSelector, activeClass, display = 'block')
-
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.balcon_icons', '.balcon_icons_img', '.big_img > img', 'do_image_more', 'inline-block');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])(modalState);
   Object(_modules_modalStateHandler__WEBPACK_IMPORTED_MODULE_4__["default"])(modalState);
-  Object(_modules_timer__WEBPACK_IMPORTED_MODULE_5__["default"])(); //       <<=============== DOMContenLoad ===============>>
+  Object(_modules_timer__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  Object(_modules_imagePopup__WEBPACK_IMPORTED_MODULE_6__["default"])(); //       <<=============== DOMContenLoad ===============>>
 });
 
 /***/ }),
@@ -17975,8 +17977,7 @@ var forms = function forms(state) {
         for (var key in state) {
           data[key] = state[key];
         }
-      } // console.log(data);
-
+      }
 
       postData('https://irvas-company-default-rtdb.firebaseio.com/orders.json', data).then(function (res) {
         return res.json();
@@ -18006,6 +18007,49 @@ var forms = function forms(state) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (forms); // FireBase   https://irvas-company-default-rtdb.firebaseio.com/orders.json
+
+/***/ }),
+
+/***/ "./src/js/modules/imagePopup.js":
+/*!**************************************!*\
+  !*** ./src/js/modules/imagePopup.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var imagePopup = function imagePopup() {
+  var imageContainer = document.querySelector('.works');
+  var imagePopup = document.createElement('figure');
+  var image = document.createElement('img');
+  imagePopup.classList.add('popup');
+  imagePopup.style.justifyContent = 'center';
+  imagePopup.style.alignItems = 'center';
+  image.style.width = '60%';
+  document.body.append(imagePopup);
+  imagePopup.append(image);
+  imageContainer.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    if (event.target.classList.contains('preview')) {
+      var src = event.target.getAttribute('src');
+      var alt = event.target.getAttribute('alt');
+      image.setAttribute('src', src);
+      image.setAttribute('alt', alt);
+      imagePopup.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  });
+  imagePopup.addEventListener('click', function (event) {
+    if (event.target == event.currentTarget) {
+      imagePopup.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (imagePopup);
 
 /***/ }),
 
@@ -18227,7 +18271,6 @@ var timer = function timer() {
   var mounthes = ['нваря', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
   document.querySelector('#deadline-date').textContent = deadlineDate;
   document.querySelector('#deadline-mounth').textContent = mounthes[deadlineMounth];
-  console.log(deadlineMounth, deadlineDate);
 
   function getRemnant() {
     var now = Date.now();
