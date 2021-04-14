@@ -415,7 +415,7 @@
                 <form class="form main_form decoration_form" action="#">
                   <h2>Запишитесь сегодня на <br><span>бесплатный замер</span></h2>
                   <input class="form-control form_input" name="user_name" required type="text" placeholder="Введите ваше имя">
-                  <input class="form-control form_input" name="user_phone" required type="text" placeholder="Введите телефон">
+                  <input class="form-control form_input" name="user_phone" required type="phone" placeholder="Введите телефон">
                   <button class="text-uppercase btn-block button" name="submit" type="submit">Вызвать замерщика!</button>
                   <p class="form_notice">Ваши данные конфиденциальны</p>
                 </form>
@@ -525,7 +525,7 @@
                 <form class="form main_form decoration_form" action="#">
                   <h2>Запишитесь сегодня на <br><span>бесплатный замер</span></h2>
                   <input class="form-control form_input" name="user_name" required type="text" placeholder="Введите ваше имя">
-                  <input class="form-control form_input" name="user_phone" required type="text" placeholder="Введите телефон">
+                  <input class="form-control form_input" name="user_phone" required type="phone" placeholder="Введите телефон">
                   <button class="text-uppercase btn-block button" name="submit" type="submit" >Вызвать замерщика!</button>
                   <p class="form_notice">Ваши данные конфиденциальны</p>
                 </form>
@@ -584,7 +584,7 @@
                 <form class="form main_form decoration_form" action="#">
                   <h2>Запишитесь сегодня на <br><span>бесплатный замер</span></h2>
                   <input class="form-control form_input" name="user_name" required type="text" placeholder="Введите ваше имя">
-                  <input class="form-control form_input" name="user_phone" required type="text" placeholder="Введите телефон">
+                  <input class="form-control form_input" name="user_phone" required type="phone" placeholder="Введите телефон">
                   <button class="text-uppercase btn-block button" name="submit" type="submit">Вызвать замерщика!</button>
                   <p class="form_notice">Ваши данные конфиденциальны</p>
                 </form>
@@ -711,7 +711,7 @@
         <div class="row">
           <div class="col-lg-5 col-md-6 wow fadeInLeft">
             <h2 class="sale_title">Акция - 60%</h2>
-            <p class="sale_subtitle">Успей сэкономить на остеклении! Только до 18 декабря!</p>
+            <p class="sale_subtitle">Успей сэкономить на остеклении! Только до <span id="deadline-date">18</span> <span id="deadline-mounth">декабря!</span></p>
             <div class="timer1" id="timer">
                 <p><h4>ДО ЗАВЕРШЕНИЯ АКЦИИ:</h4></p>
                 <div class="container1">
@@ -727,7 +727,7 @@
             <form class="form main_form" action="#">
               <h2>Запишитесь сегодня на <br><span>бесплатный замер</span></h2>
               <input class="form-control form_input" name="user_name" required type="text" placeholder="Введите ваше имя">
-              <input class="form-control form_input" name="user_phone" required type="text" placeholder="Введите телефон">
+              <input class="form-control form_input" name="user_phone" required type="phone" placeholder="Введите телефон">
               <button class="text-uppercase btn-block button" name="submit" type="submit">Вызвать замерщика!</button>
               <p class="form_notice">Ваши данные конфиденциальны</p>
             </form>
@@ -800,7 +800,7 @@
 
     <!-- Modals -->
     <!-- Request a call -->
-    <div class="popup">
+    <div class="popup" data-modal>
         <div class="popup_dialog">
             <div class="popup_content text-center">
                 <button type="button" class="popup_close"><strong>&times;</strong></button>
@@ -808,7 +808,7 @@
                     <form class="form" action="#">
                       <h2>Введите ваши данные <br>и нажмите заказать звонок</h2>
                         <input class="form-control form_input" name="user_name" required type="text" placeholder="Введите ваше имя">
-                        <input class="form-control form_input" name="user_phone" required type="text" placeholder="Введите телефон">
+                        <input class="form-control form_input" name="user_phone" required type="phone" placeholder="Введите телефон">
                         <button class="text-uppercase btn-block button" name="submit" type="submit">Заказать звонок</button>
                         <p class="form_notice">Перезвоним в течение 10 минут</p>
                     </form>
@@ -818,7 +818,7 @@
     </div>
 
     <!-- Request an engineer -->
-    <div class="popup_engineer">
+    <div class="popup_engineer" data-modal>
         <div class="popup_dialog">
             <div class="popup_content text-center">
                 <button type="button" class="popup_close"><strong>&times;</strong></button>
@@ -826,7 +826,7 @@
                     <form class="form" action="#">
                       <h2>Запишитесь сегодня на <br><span>бесплатный замер</span></h2>
                       <input class="form-control form_input" name="user_name" required type="text" placeholder="Введите ваше имя">
-                      <input class="form-control form_input" name="user_phone" required type="text" placeholder="Введите телефон">
+                      <input class="form-control form_input" name="user_phone" required type="phone" placeholder="Введите телефон">
                       <button class="text-uppercase btn-block button" name="submit" type="submit">Вызвать замерщика!</button>
                       <p class="form_notice">Ваши данные конфиденциальны</p>
                     </form>
@@ -836,7 +836,7 @@
     </div>
 
     <!-- Calculator -->
-   <div class="popup_calc">
+   <div class="popup_calc" data-modal>
         <div class="popup_dialog">
             <div class="popup_calc_content text-center">
                 <button type="button" class="popup_calc_close"><strong>&times;</strong></button>
@@ -858,56 +858,56 @@
                      <img src="assets/img/modal_calc/balkon/type3.png" alt="Тип3">
                      <img src="assets/img/modal_calc/balkon/type4.png" alt="Тип4">
                    </div>
-                <input class="form-control" id="width" type="text" placeholder="Ширина" required>
+                <input class="form-control" id="width" type="number" placeholder="Ширина" value="1000" min="200" required>
                 <label for="width">мм</label>
                 <div class="multiplication"><strong>&times;</strong></div>
-                <input class="form-control" id="height" type="text" placeholder="Высота" required>
+                <input class="form-control" id="height" type="number" placeholder="Высота" value="1000" min="200" required>
                 <label for="height">мм</label>
                 <button class="button popup_calc_button">Далее</button>
             </div>
         </div>
     </div> 
 
-   <div class="popup_calc_profile">
+   <div class="popup_calc_profile" data-modal>
         <div class="popup_dialog">
             <div class="popup_calc_profile_content text-center">
                 <button type="button" class="popup_calc_profile_close"><strong>&times;</strong></button>
-                 <h2>Калькулятор</h2>
-                 <h3>Выберите тип остекления <br>и его профиль</h3>
-                 <select class="form-control" name="view" id="view_type">
-                   <option value="tree">Деревянное остекление</option>
-                   <option value="aluminum">Алюминиевое остекление</option>
-                   <option value="plastic">Остекление пластиковыми рамами</option>
-                   <option value="french">Панорамное остекление</option>
-                   <option value="overhang">Остекление с выносом</option>
-                 </select>
-                 <img src="assets/img/modal_calc/icon_cold.png" alt="">
-                 <label>
-                     <input class="checkbox" type="checkbox" name="checkbox-test">
-                     <span class="checkbox-custom" id="cold"></span>
-                     <span class="label">Холодное</span>
-                 </label>
-                 <img src="assets/img/modal_calc/icon_warm.png" alt="">
-                 <label>
-                     <input class="checkbox" type="checkbox" name="checkbox-test">
-                     <span class="checkbox-custom" id="warm"></span>
-                     <span class="label">Теплое</span>
-                 </label>
+                  <h2>Калькулятор</h2>
+                  <h3>Выберите тип остекления <br>и его профиль</h3>
+                  <select class="form-control" name="view" id="view_type">
+                    <option value="tree" selected>Деревянное остекление</option>
+                    <option value="aluminum">Алюминиевое остекление</option>
+                    <option value="plastic">Остекление пластиковыми рамами</option>
+                    <option value="french">Панорамное остекление</option>
+                    <option value="overhang">Остекление с выносом</option>
+                  </select>
+                  <img src="assets/img/modal_calc/icon_cold.png" alt="">
+                  <label>
+                      <input class="checkbox" type="checkbox" name="checkbox-test">
+                      <span class="checkbox-custom" id="cold"></span>
+                      <span class="label">Холодное</span>
+                  </label>
+                  <img src="assets/img/modal_calc/icon_warm.png" alt="">
+                  <label>
+                      <input class="checkbox" type="checkbox" name="checkbox-test">
+                      <span class="checkbox-custom" id="warm"></span>
+                      <span class="label">Теплое</span>
+                  </label>
 
-                 <button class="button popup_calc_profile_button">Далее</button>
+                  <button class="button popup_calc_profile_button">Далее</button>
             </div>
         </div>
     </div> 
 
-    <div class="popup_calc_end">
+    <div class="popup_calc_end" data-modal>
         <div class="popup_dialog">
             <div class="popup_content text-center">
                 <button type="button" class="popup_calc_end_close"><strong>&times;</strong></button>
                 <div class="popup_form">
-                    <form class="form" action="#">
+                    <form class="form" action="#" data-form="end">
                       <h2>Спасибо за обращение! <br>Оставьте свои данные</h2>
                         <input class="form-control form_input" name="user_name" required type="text" placeholder="Введите ваше имя">
-                        <input class="form-control form_input" name="user_phone" required type="text" placeholder="Введите телефон">
+                        <input class="form-control form_input" name="user_phone" required type="phone" placeholder="Введите телефон">
                         <button class="text-uppercase btn-block button" name="submit" type="submit">Рассчитать стоимость</button>
                         <p class="form_notice">Перезвоним в течение 10 минут</p>
                     </form>

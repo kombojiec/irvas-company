@@ -1,20 +1,17 @@
+import {checkNumInputs} from '../utiles';
 
-const forms = () => {
+const forms = (state) => {
 
   const forms = document.querySelectorAll('form');
-  const inputs = document.querySelectorAll('input');
-  const phoneInputs = document.querySelectorAll('input[name="user_phone');  
+  const allInputs = document.querySelectorAll('input');
+  const popups = document.querySelectorAll('[data-modal');
   const message = {
     loading: 'Идёт отпрака данных...',
     sucsess: 'Спасибо, мы с вами свяжемся',
     fail: 'Упс... Что-то пошло не так...'
   }
 
-  phoneInputs.forEach(input => {
-    input.addEventListener('input', () =>{
-      input.value = input.value.replace(/\D/, '');
-    })
-  })
+  checkNumInputs('input[name="user_phone');
 
   const getData = async url => {
     const res = await fetch(url, {
@@ -44,12 +41,20 @@ const forms = () => {
       statusMessage.classList.add('status');
       form.appendChild(statusMessage);
       statusMessage.textContent = message.loading;
+
       const inputs = form.querySelectorAll('input');
-      const data = {};
+      let data = {};
       inputs.forEach(input => {
         data[input.name] = input.value;
       })
-      console.log(data);
+      
+      if(form.getAttribute('data-form') == 'end'){
+        for(let key in state){
+          data[key] = state[key];
+        }
+      }
+      // console.log(data);
+
       postData('https://irvas-company-default-rtdb.firebaseio.com/orders.json', data)
         .then(res => res.json())
         .then(res => {
@@ -61,16 +66,23 @@ const forms = () => {
           statusMessage.textContent = message.fail;
         })
         .finally(() => {
-          form.reset();
+          data = {};
+          allInputs.forEach(input => input.value = '');
           setTimeout(() => {
             statusMessage.remove();
-          }, 2000)
+            setTimeout(() => {
+              popups.forEach(popup => {
+                popup.style.display = 'none';
+                document.body.classList.remove('modal-open');
+              })
+            }, 500)
+          }, 1000)
         })
-    })
+      })
   })
 
 }
 
 export default forms;
 
-// BD   https://irvas-company-default-rtdb.firebaseio.com/orders/json
+// FireBase   https://irvas-company-default-rtdb.firebaseio.com/orders.json
