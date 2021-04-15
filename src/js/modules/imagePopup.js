@@ -5,6 +5,7 @@ const imagePopup = () => {
   const imagePopup = document.createElement('figure');
   const image = document.createElement('img');
   imagePopup.classList.add('popup');
+  image.classList.add('faded');
 
   imagePopup.style.justifyContent = 'center';
   imagePopup.style.alignItems = 'center';

@@ -35,6 +35,9 @@ const forms = (state) => {
   }
 
   forms.forEach(form => {
+
+    const inputs = form.querySelectorAll('input');
+
     form.addEventListener('submit', event => {
       event.preventDefault();
       let statusMessage = document.createElement('div');
@@ -42,7 +45,6 @@ const forms = (state) => {
       form.appendChild(statusMessage);
       statusMessage.textContent = message.loading;
 
-      const inputs = form.querySelectorAll('input');
       let data = {};
       inputs.forEach(input => {
         data[input.name] = input.value;

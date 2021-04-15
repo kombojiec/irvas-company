@@ -5,6 +5,8 @@ const tabs = (tabsHeaderSelector, tabsItemSelector, tabsContentSelector, activeC
   const tabsItems = document.querySelectorAll(tabsItemSelector);
   const tabs = document.querySelectorAll(tabsContentSelector);
 
+  tabs.forEach(tab => tab.classList.add('faded'));
+
   function showTabContent(index = 0){
     tabs.forEach((tab, i) => {
       if(i == index){
