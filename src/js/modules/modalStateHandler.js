@@ -32,7 +32,6 @@ const modalStateHandler = (state) => {
             state[props] = input.value;
             break;
         }
-        console.log(state);
       })
     })
   }
